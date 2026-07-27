@@ -64,13 +64,15 @@ const RecipeAPI = {
    */
   async searchRecipesByIngredients(ingredientTags) {
     // 検索中であることが分かるよう、体感できる程度のディレイを入れる
-    await wait(500 + Math.random() * 500);
+await wait(500 + Math.random() * 500);
 
-    if (this.simulateOffline || !navigator.onLine) {
-      throw new ApiError('NETWORK_ERROR', '通信エラーです');
-    }
+// デモ用の通信エラー再現
+if (this.simulateOffline) {
+  throw new ApiError('NETWORK_ERROR', '通信エラーです');
+}
 
-    const recipes = await this._loadRecipes();
+// 実際の通信可否は fetch() の結果で判定する
+const recipes = await this._loadRecipes();
 
     const normalizedTags = ingredientTags.map((t) => t.trim()).filter(Boolean);
 
