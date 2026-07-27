@@ -20,7 +20,7 @@
 // 別途注入することで、同じコードのまま Blob URL 経由の fetch() に切り替えられる。
 const RECIPES_JSON_URL = (typeof RECIPES_JSON_URL_OVERRIDE !== 'undefined')
   ? RECIPES_JSON_URL_OVERRIDE
-  : './data/recipes.json';
+  : 'data/recipes.json';
 
 const RecipeAPI = {
   /** デモ用: 強制的に通信エラーを発生させるフラグ（UIのトグルから制御） */
