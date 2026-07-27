@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>冷蔵庫アシスタント | 今日は何が作れる？</title>
+<meta name="description" content="冷蔵庫にある食材を入力すると、作れるレシピを検索し、不足食材や買い物リストを作成できるWebアプリ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="p-visually-hidden" href="#main">本文へスキップ</a>
+
+<header class="l-header">
+  <div class="c-brand">
+    <div class="c-brand__mark" aria-hidden="true">🧊</div>
+    <p class="c-brand__name">冷蔵庫<span>アシスタント</span></p>
+    <nav class="l-desktopnav" aria-label="画面切り替え">
+      <button type="button" class="p-tabbar__item" data-tab-target="search" aria-current="page">
+        <span class="p-tabbar__icon" aria-hidden="true">🔍</span>検索
+      </button>
+      <button type="button" class="p-tabbar__item" data-tab-target="favorites" aria-current="false">
+        <span class="p-tabbar__icon" aria-hidden="true">⭐</span>お気に入り
+      </button>
+      <button type="button" class="p-tabbar__item" data-tab-target="shopping" aria-current="false">
+        <span class="p-tabbar__icon" aria-hidden="true">🛒</span>買い物リスト
+      </button>
+    </nav>
+    <button type="button" class="c-themetoggle" id="themeToggle" aria-label="ダークモードに切り替え">🌙</button>
+  </div>
+</header>
+
+<main id="main" class="l-main">
+
+  <!-- ============ TOP / 検索パネル ============ -->
+  <section id="panel-search" class="l-section" aria-labelledby="heroTitle">
+    <div class="c-hero">
+      <h1 class="c-hero__title" id="heroTitle">今日は<em>何が</em>作れる？</h1>
+      <p class="c-hero__sub">冷蔵庫にある食材を入力すると、作れるレシピと不足食材を教えてくれます。</p>
+    </div>
+
+    <form class="c-taginput" id="searchForm" novalidate>
+      <div class="c-taginput__field" id="tagField">
+        <input
+          type="text"
+          id="tagInput"
+          class="c-taginput__input"
+          placeholder="食材を入力してEnter（例: 卵）"
+          aria-label="食材を入力"
+          autocomplete="off"
+        >
+      </div>
+      <div class="c-taginput__candidates" id="candidateList" aria-label="よく使う食材の候補"></div>
+      <div class="c-recent" id="recentSearch"></div>
+
+      <div class="c-searchrow">
+        <button type="submit" class="c-button c-button--primary">🔍 レシピを検索</button>
+        <label class="c-offlinetoggle">
+          <input type="checkbox" id="offlineToggle">
+          オフラインモードをテスト（通信エラーの動作確認用）
+        </label>
+      </div>
+    </form>
+
+    <div class="u-mt-16">
+      <div class="o-sectionhead">
+        <h2 class="o-sectionhead__title">検索結果</h2>
+        <span class="o-sectionhead__count" id="resultsCount"></span>
+      </div>
+      <div id="resultsRegion" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ============ お気に入りパネル ============ -->
+  <section id="panel-favorites" class="l-section u-hidden" aria-labelledby="favTitle">
+    <div class="o-sectionhead">
+      <h2 class="o-sectionhead__title" id="favTitle">⭐ お気に入り</h2>
+      <span class="o-sectionhead__count" id="favoritesCount"></span>
+    </div>
+    <div id="favoritesRegion"></div>
+  </section>
+
+  <!-- ============ 買い物リストパネル ============ -->
+  <section id="panel-shopping" class="l-section u-hidden" aria-labelledby="shopTitle">
+    <div class="o-sectionhead">
+      <h2 class="o-sectionhead__title" id="shopTitle">🛒 買い物リスト</h2>
+      <span class="o-sectionhead__count" id="shoppingCount"></span>
+    </div>
+    <div id="shoppingRegion"></div>
+  </section>
+
+  <div class="l-tabspacer" aria-hidden="true"></div>
+</main>
+
+<!-- ============ ボトムナビ（モバイル） ============ -->
+<nav class="l-bottomnav" aria-label="画面切り替え">
+  <div class="p-tabbar">
+    <button type="button" class="p-tabbar__item" data-tab-target="search" aria-current="page">
+      <span class="p-tabbar__icon" aria-hidden="true">🔍</span>検索
+    </button>
+    <button type="button" class="p-tabbar__item" data-tab-target="favorites" aria-current="false">
+      <span class="p-tabbar__icon" aria-hidden="true">⭐</span>お気に入り
+      <span class="p-tabbar__badge u-hidden" data-badge>0</span>
+    </button>
+    <button type="button" class="p-tabbar__item" data-tab-target="shopping" aria-current="false">
+      <span class="p-tabbar__icon" aria-hidden="true">🛒</span>買い物リスト
+      <span class="p-tabbar__badge u-hidden" data-badge>0</span>
+    </button>
+  </div>
+</nav>
+
+<div id="modalRoot"></div>
+
+<script src="js/config.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
