@@ -215,7 +215,8 @@ c-recipe-card__button
 ```
 fridge-assistant/
 ├── index.html
-├── recipes.json
+├── data
+│   └── recipes.json
 ├── css/
 │   └── style.css
 ├── js/
@@ -262,4 +263,3 @@ python3 -m http.server 8000
 
 AK_dot_com
 
-Web制作・フロントエンド技術を中心に学習し、ユーザー課題を解決するWebアプリ制作に取り組んでいます。
